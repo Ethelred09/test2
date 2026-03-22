@@ -210,7 +210,7 @@
   </div>
 
   <script>
-    const REWARD_PA = 50;
+     const REWARD_PA = 50;
   const REWARD_GOLD = 25;
 
   const dailyRewards = [
@@ -245,6 +245,15 @@
     { day: 29, reward: "+100 PA" },
     { day: 30, reward: "Grande récompense" }
   ];
+
+  const dialogues = [
+    "Je...Où suis-je ?",
+    "Le sol est froid sous mes doigts.",
+    "La lumière de la nuit éclaire la pièce."
+    "Des personnes approchent..."
+  ];
+
+  let dialogueIndex = 0; 
 
   function getTodayDateString() {
     const today = new Date();
@@ -367,6 +376,31 @@
         openSection("profil");
       });
     }
+  }
+
+  function startEpisode1() {
+    document.querySelector(".test-page").style.display = "none"; 
+    document.getElementById("game-container").style.display = "block";
+
+    dialogueIndex = 0;
+    document.getElementById("dialogue-text").textContent = dialogues[0]
+  }
+
+  function nextDialogue() {
+    dialogueIndex++;
+
+    if (dialogueIndex < dialogues.length) {
+      document.getElementById("dialogue-text").textContent = dialogues[dialogueIndex];
+      } else {
+        endEpisode();
+      }
+  }
+
+  function endEpisode () {
+    document.getElementById("game-container").style.display = "none"; 
+    document.querySelector(".test-page").stye.display = "block";
+
+    openSection("episode")
   }
 
   document.addEventListener("DOMContentLoaded", function () {
