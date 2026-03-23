@@ -155,39 +155,49 @@
     document.getElementById("dialogue-text").textContent = current.text;
   }
 
-  function nextDialogue() {
-    const currentPa = Number(localStorage.getItem("test_pa")) || 0;
+ function nextDialogue() {
+  startMusic(); // 👈 IMPORTANT
 
-    if (currentPa < DIALOGUE_COST) {
-      alert("Tu n’as pas assez de PA pour continuer l’histoire.");
-      return;
-    }
+  const currentPa = Number(localStorage.getItem("test_pa")) || 0;
 
-    const newPa = currentPa - DIALOGUE_COST;
-    localStorage.setItem("test_pa", String(newPa));
-
-    currentDialogueIndex++;
-
-    if (currentDialogueIndex < episode1Dialogues.length) {
-      updateEpisodeCurrencyDisplay();
-      showDialogue();
-    } else {
-      window.location.href = "index.html";
-    }
+  if (currentPa < DIALOGUE_COST) {
+    alert("Tu n’as pas assez de PA pour continuer l’histoire.");
+    return;
   }
+
+  const newPa = currentPa - DIALOGUE_COST;
+  localStorage.setItem("test_pa", String(newPa));
+
+  currentDialogueIndex++;
+
+  if (currentDialogueIndex < episode1Dialogues.length) {
+    updateEpisodeCurrencyDisplay();
+    showDialogue();
+  } else {
+    window.location.href = "index.html";
+  }
+}
 
   document.addEventListener("DOMContentLoaded", function () {
     showDialogue();
     updateEpisodeCurrencyDisplay();
+    
 
-    const music = document.getElementById("bg-music");
-    if (music) {
-        music.volume = 0.5; //volume 50%
-        music.play().catch(() => {
-            console.log("autoplay bloqué");
-        });
-    }
-  });      
+   let musicStarted = false;
+
+function startMusic() {
+  if (musicStarted) return;
+
+  const music = document.getElementById("bg-music");
+  if (music) {
+    music.volume = 0.4;
+    music.play().then(() => {
+      musicStarted = true;
+    }).catch(() => {
+      console.log("Autoplay bloqué");
+    });
+  }
+}
 
 
   </script>
