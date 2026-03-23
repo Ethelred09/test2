@@ -69,12 +69,12 @@
         <span class="feature-text">Carte bonus après 10 jours</span>
       </div>
 
-      <div class="home-side-card">
-        <h3 class="small-side-title">Pack du mois</h3>
+      <div class="home-feature-card" onclick="openSection('Pack du mois')">
+         <h3 class="small-side-title">Pack du mois</h3>
         <p>Offre spéciale en cours.</p>
       </div>
 
-      <div class="home-side-card">
+      <div class="home-feature-card" onclick="openSection('Actus du jeu')">
         <h3 class="small-side-title">Actu du jeu</h3>
         <p>Nouvel épisode bientôt disponible.</p>
       </div>
@@ -86,7 +86,6 @@
         <div id="calendar-grid" class="calendar-grid"></div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -106,7 +105,7 @@
         <div class="test-card">
           <h3>Épisode 1</h3>
           <p>Le réveil de ton héroïne et sa découverte d’un nouveau monde.</p>
-          <div class="play-button" onclick="StartEpisode1">Jouer</div>
+          <div class="test-button" onclick="window.location.href='episode1.html'">Jouer</div>
         </div>
 
         <div class="test-card">
@@ -210,7 +209,7 @@
   </div>
 
   <script>
-     const REWARD_PA = 50;
+    const REWARD_PA = 50;
   const REWARD_GOLD = 25;
 
   const dailyRewards = [
@@ -245,15 +244,6 @@
     { day: 29, reward: "+100 PA" },
     { day: 30, reward: "Grande récompense" }
   ];
-
-  const dialogues = [
-    "Je...Où suis-je ?",
-    "Le sol est froid sous mes doigts.",
-    "La lumière de la nuit éclaire la pièce."
-    "Des personnes approchent..."
-  ];
-
-  let dialogueIndex = 0; 
 
   function getTodayDateString() {
     const today = new Date();
@@ -376,31 +366,6 @@
         openSection("profil");
       });
     }
-  }
-
-  function startEpisode1() {
-    document.querySelector(".test-page").style.display = "none"; 
-    document.getElementById("game-container").style.display = "block";
-
-    dialogueIndex = 0;
-    document.getElementById("dialogue-text").textContent = dialogues[0]
-  }
-
-  function nextDialogue() {
-    dialogueIndex++;
-
-    if (dialogueIndex < dialogues.length) {
-      document.getElementById("dialogue-text").textContent = dialogues[dialogueIndex];
-      } else {
-        endEpisode();
-      }
-  }
-
-  function endEpisode () {
-    document.getElementById("game-container").style.display = "none"; 
-    document.querySelector(".test-page").stye.display = "block";
-
-    openSection("episode")
   }
 
   document.addEventListener("DOMContentLoaded", function () {
