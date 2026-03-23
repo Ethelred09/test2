@@ -108,6 +108,8 @@
   <div id="episode-screen">
     <div id="episode-overlay"></div>
 
+    <audio id="bg-music" src="musique/paix-sanctuaire.mp3"loop></audio>
+
     <button id="back-button" onclick="window.location.href='index.html'">
       Retour
     </button>
@@ -177,7 +179,17 @@
   document.addEventListener("DOMContentLoaded", function () {
     showDialogue();
     updateEpisodeCurrencyDisplay();
+
+    const music = document.getElementById("bg-music");
+    if (music) {
+        music.volume = 0.5; //volume 50%
+        music.play().catch(() => {
+            console.log("autoplay bloqué");
+        });
+    }
   });      
+
+
   </script>
 
 </body>
